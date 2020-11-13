@@ -1,0 +1,58 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+#AudioPlayer{
+  width: 100%;
+  height: auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-image: url(https://i.pinimg.com/originals/4a/34/99/4a3499c6b5cca368ec4e3717f9077114.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.AudioImageArea{
+    border: red 1px solid;
+    width: 20%;
+    margin: auto;
+    height: 17rem;
+}
+.AudioPlayerImage{
+    width: 100%;
+    height: auto;
+}
+.name{
+    color: white;
+    font-weight: 600;
+}
+.ChangeAudioButtons{
+    border: steelblue 1px solid;
+    width: 40%;
+    margin: auto;
+}
+.CoosheSituaionAuddio{
+    border: tomato 1px solid;
+    display: flex;
+    justify-content: space-between;
+}
+.BackNextPauseButtons{
+    border: snow 1px solid;
+    display: flex;
+    justify-content: space-between;
+}
+.footericon{
+    border: sienna 1px solid;
+    font-size: 3rem;
+    margin: 1rem;
+    color: rgb(240, 240, 240);
+    cursor: pointer;
+    transition: ease-in-out 200ms;
+}
+.footericon:hover{
+    color: rgb(195, 196, 195);
+}
+.footericon:focus{
+    color: yellow;
+}

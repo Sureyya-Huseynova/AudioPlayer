@@ -6,12 +6,16 @@ let backAudioPlayer = document.querySelector(".BackAudioPlayer");
 let pauseAudioPlayer = document.querySelector(".PauseAudioPlayer");
 let nextAudioPlayer = document.querySelector(".NextAudioPlayer");
 let randomAudio = document.querySelector(".RandomAudio");
+let showSeekLength = document.querySelector(".SeekLength");
+let currentTime = document.querySelector(".CurrentTime");
+let totalDuration = document.querySelector(".TotalDuration");
 
 // eventes
 randomAudio.addEventListener("click", RandomChooseAudio);
 pauseAudioPlayer.addEventListener("click", PlayPauseAudio);
 nextAudioPlayer.addEventListener("click", NextAudio);
 backAudioPlayer.addEventListener("click", BackAudio);
+showSeekLength.addEventListener("change", SeeklengthAudio)
 
 // data store of audioplayer
 let audioList = [
@@ -112,10 +116,9 @@ function NextAudio() {
 }
 
 // change Back Audio
-function BackAudio() {
-    audioIndex -= 1;
-    if (audioIndex < 0) {
-        audioIndex = audioList.length - 1
+function BackAudio() {  
+    if (audioIndex > 0) {
+        audioIndex -= 1;
     }
     if (randomButtonNumber % 2 == 0) {
         randomReseultValue = (Math.floor(Math.random() * 100 % 5));
@@ -128,4 +131,43 @@ function BackAudio() {
     PlayAudio();
 }
 
-// audio length
+// show audio length
+function SeeklengthAudio(){
+   let seeklengthAudio = currentAudio.duration * (showSeekLength.value / 100);
+   currentAudio.currentTime = seeklengthAudio;   
+}
+
+// update audio timer
+  
+function seekUpdate(){
+    let seekposition=0;
+    setInterval(function(){
+        if(!isNaN(currentAudio.duration)){
+            seekposition= currentAudio.currentTime * (100/currentAudio.duration);
+            showSeekLength.value=seekposition;
+    
+            let currentMinutes = Math.floor(currentAudio.currentTime / 60); 
+            let currentSeconds = Math.floor(currentAudio.currentTime - currentMinutes * 60); 
+            let durationMinutes = Math.floor(currentAudio.duration / 60); 
+            let durationSeconds = Math.floor(currentAudio.duration - durationMinutes * 60); 
+          
+            console.log(currentMinutes)
+            if (currentSeconds < 10) { currentSeconds = "0" + currentSeconds; } 
+            if (durationSeconds < 10) { durationSeconds = "0" + durationSeconds; } 
+            if (currentMinutes < 10) { currentMinutes = "0" + currentMinutes; } 
+            if (durationMinutes < 10) { durationMinutes = "0" + durationMinutes; } 
+    
+            currentTime.textContent = currentMinutes + ":" + currentSeconds; 
+            totalDuration.textContent = durationMinutes + ":" + durationSeconds;
+        }
+    },1000) 
+  
+}
+
+seekUpdate();
+
+
+
+
+
+    

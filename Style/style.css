@@ -4,6 +4,7 @@
   padding: 0;
   margin: 0;
 }
+
 #AudioPlayer {
   width: 100%;
   height: auto;
@@ -16,7 +17,7 @@
 }
 
 .AudioImageArea {
-  border: red 1px solid;
+  border: rgb(255, 250, 250) 1px solid;
   width: 20%;
   margin: auto;
   height: 17rem;
@@ -32,7 +33,7 @@
   font-weight: 600;
 }
 
-.ChangeAudioArea {
+.ChangeAudioButtons {
   border: steelblue 1px solid;
   width: 40%;
   margin: auto;
@@ -48,8 +49,8 @@
           justify-content: space-between;
 }
 
-.BackForwardStopArea {
-  border: snow 1px solid;
+.BackNextPauseButtons {
+  border: #1ef50b 2px solid;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

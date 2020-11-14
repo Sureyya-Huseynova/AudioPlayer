@@ -9,6 +9,7 @@ let randomAudio = document.querySelector(".RandomAudio");
 let showSeekLength = document.querySelector(".SeekLength");
 let currentTime = document.querySelector(".CurrentTime");
 let totalDuration = document.querySelector(".TotalDuration");
+let volumeVoice = document.querySelector(".VolumeVoice");
 
 // eventes
 randomAudio.addEventListener("click", RandomChooseAudio);
@@ -16,6 +17,8 @@ pauseAudioPlayer.addEventListener("click", PlayPauseAudio);
 nextAudioPlayer.addEventListener("click", NextAudio);
 backAudioPlayer.addEventListener("click", BackAudio);
 showSeekLength.addEventListener("change", SeeklengthAudio)
+volumeVoice.addEventListener("change", ChangevolumeVoice)
+
 
 // data store of audioplayer
 let audioList = [
@@ -137,10 +140,10 @@ function SeeklengthAudio(){
    currentAudio.currentTime = seeklengthAudio;   
 }
 
-// update audio timer
-  
+// update audio time
 function seekUpdate(){
     let seekposition=0;
+
     setInterval(function(){
         if(!isNaN(currentAudio.duration)){
             seekposition= currentAudio.currentTime * (100/currentAudio.duration);
@@ -161,12 +164,13 @@ function seekUpdate(){
             totalDuration.textContent = durationMinutes + ":" + durationSeconds;
         }
     },1000) 
-  
 }
-
 seekUpdate();
 
-
+// change audio valume
+function ChangevolumeVoice() {
+    currentAudio.volume = volumeVoice.value / 100;
+  }
 
 
 

@@ -65,7 +65,8 @@ function loadAudio(audioIndex) {
     currentAudio.src = audioList[audioIndex].audio;
 }
 
-// random buttona vurduqda tek cut ededler yaradir. Cut edeler cixdiqda random activdir demekdir , tek eded olduqda random active deyil 
+// random buttona vurduqda tek cut ededler yaradir. Cut edeler cixdiqda random activdir demekdir , tek eded olduqda random active deyil . (bu yoxlanishi next back  buttonlari vurduqda check edib ona uygun netice cixaracagiq, bura da yalniz tek ve cut ededler istehsal olunur)
+
 function RandomChooseAudio() {
     randomButtonNumber += 1;
 }
@@ -100,7 +101,13 @@ function NextAudio() {
     else {
         audioIndex = 0;
     }
-    loadAudio(audioIndex);
+    if (randomButtonNumber % 2 == 0) {
+        randomReseultValue = (Math.floor(Math.random() * 100 % 5));
+        loadAudio(randomReseultValue);
+
+    } else {
+        loadAudio(audioIndex);
+    }
     PlayAudio();
 }
 
@@ -110,7 +117,15 @@ function BackAudio() {
     if (audioIndex < 0) {
         audioIndex = audioList.length - 1
     }
-    loadAudio(audioIndex);
+    if (randomButtonNumber % 2 == 0) {
+        randomReseultValue = (Math.floor(Math.random() * 100 % 5));
+        console.log(randomReseultValue)
+        loadAudio(randomReseultValue);
+
+    } else {
+        loadAudio(audioIndex);
+    }
     PlayAudio();
 }
 
+// audio length

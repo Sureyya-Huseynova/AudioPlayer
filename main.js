@@ -10,6 +10,7 @@ let showSeekLength = document.querySelector(".SeekLength");
 let currentTime = document.querySelector(".CurrentTime");
 let totalDuration = document.querySelector(".TotalDuration");
 let volumeVoice = document.querySelector(".VolumeVoice");
+let repeatAudio = document.querySelector(".RepeatAudio");
 
 // eventes
 randomAudio.addEventListener("click", RandomChooseAudio);
@@ -18,6 +19,7 @@ nextAudioPlayer.addEventListener("click", NextAudio);
 backAudioPlayer.addEventListener("click", BackAudio);
 showSeekLength.addEventListener("change", SeeklengthAudio)
 volumeVoice.addEventListener("change", ChangevolumeVoice)
+repeatAudio.addEventListener("click", RepeatAudioVoice)
 
 
 // data store of audioplayer
@@ -63,6 +65,7 @@ let audioIndex = 0;
 let isPlaying = false;
 let randomButtonNumber = 1;
 var randomReseultValue;
+let repeatButtonNumber = 1;
 
 // this line when pressed for first time pause button ,audio will playing 
 currentAudio.src = audioList[audioIndex].audio;
@@ -92,12 +95,32 @@ function PlayPauseAudio() {
 function PlayAudio() {
     currentAudio.play();
     isPlaying = true;
+    //Repeat();
 }
 
 // when call this function , audio is not play
 function PauseAudio() {
     currentAudio.pause();
     isPlaying = false;
+}
+
+// when click repeat button audio is reating
+function RepeatAudioVoice(){
+    repeatButtonNumber+=1;
+    //console.log(repeatButtonNumber)
+    if(repeatButtonNumber % 2 ==0){
+        console.log("ok")
+        currentAudio.loop=true;
+    }else{
+        currentAudio.loop=false;
+    }
+}
+// when audio is finish, next audio is starting
+function AutoChange(){
+    if(Math.floor(currentAudio.currentTime) == Math.floor(currentAudio.duration)){
+        loadAudio(audioIndex+=1) 
+            currentAudio.play();
+    }
 }
 
 // change  Next Audio
@@ -119,13 +142,13 @@ function NextAudio() {
 }
 
 // change Back Audio
-function BackAudio() {  
+function BackAudio() {
     if (audioIndex > 0) {
         audioIndex -= 1;
     }
+
     if (randomButtonNumber % 2 == 0) {
         randomReseultValue = (Math.floor(Math.random() * 100 % 5));
-        console.log(randomReseultValue)
         loadAudio(randomReseultValue);
 
     } else {
@@ -135,43 +158,41 @@ function BackAudio() {
 }
 
 // show audio length
-function SeeklengthAudio(){
-   let seeklengthAudio = currentAudio.duration * (showSeekLength.value / 100);
-   currentAudio.currentTime = seeklengthAudio;   
+function SeeklengthAudio() {
+    let seeklengthAudio = currentAudio.duration * (showSeekLength.value / 100);
+    currentAudio.currentTime = seeklengthAudio;
 }
 
 // update audio time
-function seekUpdate(){
-    let seekposition=0;
+function seekUpdate() {
+    let seekposition = 0;
+    setInterval(function () {
+        //console.log(currentAudio.duration)
+        if (!isNaN(currentAudio.duration)) {
+            seekposition = currentAudio.currentTime * (100 / currentAudio.duration);
+            showSeekLength.value = seekposition;
 
-    setInterval(function(){
-        if(!isNaN(currentAudio.duration)){
-            seekposition= currentAudio.currentTime * (100/currentAudio.duration);
-            showSeekLength.value=seekposition;
-    
-            let currentMinutes = Math.floor(currentAudio.currentTime / 60); 
-            let currentSeconds = Math.floor(currentAudio.currentTime - currentMinutes * 60); 
-            let durationMinutes = Math.floor(currentAudio.duration / 60); 
-            let durationSeconds = Math.floor(currentAudio.duration - durationMinutes * 60); 
-          
-            console.log(currentMinutes)
-            if (currentSeconds < 10) { currentSeconds = "0" + currentSeconds; } 
-            if (durationSeconds < 10) { durationSeconds = "0" + durationSeconds; } 
-            if (currentMinutes < 10) { currentMinutes = "0" + currentMinutes; } 
-            if (durationMinutes < 10) { durationMinutes = "0" + durationMinutes; } 
-    
-            currentTime.textContent = currentMinutes + ":" + currentSeconds; 
+            let currentMinutes = Math.floor(currentAudio.currentTime / 60);
+            let currentSeconds = Math.floor(currentAudio.currentTime - currentMinutes * 60);
+            let durationMinutes = Math.floor(currentAudio.duration / 60);
+            let durationSeconds = Math.floor(currentAudio.duration - durationMinutes * 60);
+
+            if (currentSeconds < 10) { currentSeconds = "0" + currentSeconds; }
+            if (durationSeconds < 10) { durationSeconds = "0" + durationSeconds; }
+            if (currentMinutes < 10) { currentMinutes = "0" + currentMinutes; }
+            if (durationMinutes < 10) { durationMinutes = "0" + durationMinutes; }
+
+            currentTime.textContent = currentMinutes + ":" + currentSeconds;
             totalDuration.textContent = durationMinutes + ":" + durationSeconds;
+            AutoChange();
+
         }
-    },1000) 
+    }, 1000)
 }
 seekUpdate();
 
 // change audio valume
 function ChangevolumeVoice() {
     currentAudio.volume = volumeVoice.value / 100;
-  }
+}
 
-
-
-    

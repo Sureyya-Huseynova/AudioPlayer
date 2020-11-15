@@ -3,56 +3,131 @@
     padding: 0;
     margin: 0;
 }
-#AudioPlayer{
+@import "./Sileder.css";
+html{
+    font-size: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#BodyImage{
   width: 100%;
-  height: auto;
+  min-height: 65.5rem;
+  max-height: 95.5rem;
   padding-top: 5rem;
   padding-bottom: 5rem;
-  background-image: url(https://i.pinimg.com/originals/4a/34/99/4a3499c6b5cca368ec4e3717f9077114.gif);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  background-image: url(https://www.brandmusiq.com/wp-content/uploads/2017/11/2-825x390.jpg);
+  filter: blur(6px); 
+}
+#AudioPlayer{
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    width: 100%;
+    margin: auto;
+}
+// ses  vermek 
+.VolumeVoiceArea{
+    display: flex;
+    margin-left: 110%;
+    transform: rotate(-90deg);
+    position: relative;
+    bottom: 17%;
 }
 .AudioImageArea{
-    border: red 1px solid;
-    width: 20%;
+    width: 22%;
     margin: auto;
-    height: 17rem;
+    height: 21rem;
 }
 .AudioPlayerImage{
     width: 100%;
-    height: auto;
+    height: 30rem;
+    border-radius: 4%;
+    margin-bottom: 2rem;
 }
 .name{
-    color: white;
-    font-weight: 600;
+   font-weight: 700;
+   font-size: 2.5rem;
+   text-align: center;
+   margin: 1rem;
+   background-color: transparent;
+   color: white;
 }
-.ChangeAudioButtons{
-    border: steelblue 1px solid;
-    width: 40%;
+// buttons
+.AudioPlayerButtonsContainer{
+    background-image: linear-gradient(rgba(182, 182, 185, 0.329), black);
+    box-shadow: 10px 10px 20px 10px rgba(160, 160, 160, 0.329);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.AudioPlayerButtons{
+    width: 30%;
     margin: auto;
+    padding-bottom: 5rem; 
 }
-.CoosheSituaionAuddio{
-    border: tomato 1px solid;
+.CoosheSituaionAudio, .AudioLengthSeek, .BackNextPauseButtons{
     display: flex;
     justify-content: space-between;
 }
-.BackNextPauseButtons{
-    border: rgb(30, 245, 11) 2px solid;
-    display: flex;
-    justify-content: space-between;
+.PauseAudioPlayer, .LikeAudio{
+    font-size: 4.5rem !important;
 }
-.footericon{
-    border: sienna 1px solid;
+.FontProperty{
     font-size: 3rem;
-    margin: 1rem;
     color: rgb(240, 240, 240);
     cursor: pointer;
     transition: ease-in-out 200ms;
+    padding: 1rem;
+    border-radius: 45%;
+    font-weight: 700;
 }
-.footericon:hover{
-    color: rgb(195, 196, 195);
+.FontProperty:hover{
+    background-color: rgba(206, 206, 206, 0.233);
 }
-.footericon:focus{
-    color: yellow;
+.BlackActive:active{
+    color: rgb(0, 0, 0);
+    transition: ease-in-out 300ms;
 }
+.LikeAudio:active{
+    transition: 200ms;
+    color: rgb(255, 28, 28);
+    z-index: 2;
+}
+  @media screen and (max-width: 576px) {
+      html{
+          font-size: 7px;
+      }
+      #BodyImage{
+          height: 80rem;
+      }
+      #AudioPlayer{
+          top: 15%;
+      }
+      .AudioImageArea{
+          width: 60%;
+      }
+      .AudioPlayerImage{
+          height: 37rem;
+      }
+      .FontProperty{
+          font-size: 2.5rem;
+      }
+      .AudioPlayerButtons{
+          width: 90%;
+      }
+  }
+
+  @media (max-width: 1000px) and (min-width:576px){
+    html{
+        font-size: 9px;
+    }
+     .AudioImageArea{
+         width: 30%;
+     }
+     .AudioPlayerButtons{
+         width: 60%;
+     } 
+  }
+
